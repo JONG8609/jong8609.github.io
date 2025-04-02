@@ -1,33 +1,25 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WELL WASHING</title>
 
-    <!-- 스타일시트 연결 -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="header.css"> <!-- 여기에 header.css 추가! -->
-
-    <!-- 스크립트도 필요하면 여기에 -->
-    <script>
-        function toggleMenu() {
-            document.querySelector('.nav-menu').classList.toggle('active');
-        }
-    </script>
+    <!-- 전체 스타일 -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- 헤더 전용 스타일 -->
+    <link rel="stylesheet" href="header.css" />
 </head>
 <body>
     <header class="top-bar">
+        <!-- 로고 -->
         <div class="logo">
             <a href="index.html">
-                <img src="src/images/logo.png" alt="WELL WASHING LOGO">
+                <img src="src/images/logo.png" alt="WELL WASHING LOGO" />
             </a>
         </div>
 
-        <div class="menu-toggle" onclick="toggleMenu()">
-            ☰
-        </div>
-
+        <!-- 네비게이션 메뉴 -->
         <nav class="nav-menu">
             <ul>
                 <li><a href="about.html">회사소개</a></li>
@@ -38,11 +30,12 @@
             </ul>
         </nav>
 
+        <!-- 우측 버튼 (현재 비활성화 상태) -->
         <div class="top-right">
-         <!--   <button class="inquiry-button" id="franchise-btn">창업문의</button>-->
+            <!-- <button class="inquiry-button" id="franchise-btn">창업문의</button> -->
         </div>
     </header>
 
-    <!-- 나머지 페이지 내용... -->
+    <!-- 나머지 페이지 내용 -->
 </body>
 </html>
