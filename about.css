@@ -206,3 +206,70 @@
     color: #444;
     font-weight: 600;
 }
+
+@media screen and (max-width: 768px) {
+    /* section 본문 여백 및 폰트 크기 조정 */
+    .section {
+        padding: 30px 15px;
+        border-radius: 8px;
+    }
+
+    .overview-text p,
+    .section p,
+    .section ul {
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    /* 그리드 사진: 간격 줄이기 */
+    .photo-grid {
+        gap: 12px;
+    }
+
+    .photo-grid figcaption {
+        font-size: 13px;
+    }
+
+    /* 특허 이미지 */
+    .patent-gallery {
+        gap: 12px;
+    }
+
+    .patent-gallery img {
+        width: 120px;
+    }
+
+    .patent-gallery figcaption {
+        font-size: 13px;
+    }
+
+    /* 타임라인 여백 줄이기 */
+    .timeline li {
+        margin-bottom: 6px;
+        padding-left: 16px;
+    }
+
+    .timeline li::before {
+        top: 1px;
+    }
+
+    /* 공장 사진 레이아웃 변경: 1~2열 */
+    .factory-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 16px;
+    }
+
+    .factory-gallery figure {
+        height: auto; /* 고정 높이 해제 */
+        padding: 8px;
+    }
+
+    .factory-gallery img {
+        height: 160px;
+    }
+
+    .factory-gallery figcaption {
+        font-size: 13px;
+        margin-top: 6px;
+    }
+}
