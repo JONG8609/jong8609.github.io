@@ -255,8 +255,8 @@
 
     /* 공장 사진 레이아웃 변경: 1~2열 */
     .factory-gallery {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 16px;
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 
     .factory-gallery figure {
@@ -265,13 +265,13 @@
     }
 
     .factory-gallery img {
-        height: 200px; /* ✅ 더 커지게 설정 */
+        height: 240px; /* ✅ 충분한 시원한 크기 */
         object-fit: cover;
         border-radius: 6px;
     }
 
     .factory-gallery figcaption {
-        font-size: 13px;
-        margin-top: 6px;
+        font-size: 14px;
+        margin-top: 8px;
     }
 }
