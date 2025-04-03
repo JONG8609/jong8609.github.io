@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>메인 페이지 | WELL WASHING</title>
+
+    <!-- ✅ 깜빡임 방지: 초기에는 body 숨김 -->
+    <style>
+        body {
+            visibility: hidden;
+        }
+    </style>
+
+    <!-- ✅ CSS 파일 로드 -->
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="popup.css">
     <link rel="stylesheet" href="footer.css">
@@ -52,6 +61,9 @@
             loadComponent("footer", "footer.html")
         ]).then(() => {
             console.log("🚀 헤더 & 푸터 로딩 완료!");
+
+            // ✅ 모든 로딩이 끝난 뒤 body 보이게
+            document.body.style.visibility = "visible";
 
             if (typeof USE_POPUP !== "undefined" && USE_POPUP) {
                 console.log("✅ 팝업 실행 조건 충족 → popup.js 로드");
