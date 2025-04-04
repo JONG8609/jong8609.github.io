@@ -54,12 +54,23 @@ const popupData = [
             <div style="text-align: center; font-size: 18px; line-height: 1.8;">
                 <span>인천 송도 레이크시티 힐스테이트 4차</span><br>
                 <span>향후 다수 입점 예정</span><br>
-                <span>추가 협의 중인 단지</span><br>
-                <span>2025년 분양 예정 지역</span>
+        
             </div>
         `,
     }
 ];
+
+// "오픈 예정!" 앞까지의 유효한 팝업 수 확인
+const openItems = popupData.filter(p => p.title !== "오픈 예정!");
+const total = openItems.length;
+
+// title 뒤에 (1/5) 식으로 붙이기
+popupData.forEach((item, idx) => {
+    const isBeforePlanned = idx < total && item.title !== "오픈 예정!";
+    if (isBeforePlanned) {
+        item.title += ` (${idx + 1}/${total})`;
+    }
+});
 
 let currentPopupIndex = 0;
 let allPopupsClosed = false;
