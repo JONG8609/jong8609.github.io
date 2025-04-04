@@ -69,6 +69,40 @@ let savedTop = null;
 let hasSavedPosition = false; // ✅ 위치 저장 여부 플래그
 
 function createPopup(index) {
+
+// 📱 모바일 환경이면 버튼 숨기고 스와이프 기능 활성화
+const isMobile = window.innerWidth <= 768;
+const popupNav = popupOverlay.querySelector(".popup-nav");
+if (isMobile && popupNav) {
+    popupNav.style.display = "none"; // 버튼 숨김
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    popupOverlay.addEventListener("touchstart", function (e) {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    popupOverlay.addEventListener("touchend", function (e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50; // 최소 스와이프 거리
+        if (touchEndX < touchStartX - swipeThreshold && currentPopupIndex < popupData.length - 1) {
+            savePositionBeforeNavigate();
+            popupOverlay.remove();
+            createPopup(++currentPopupIndex);
+        }
+        if (touchEndX > touchStartX + swipeThreshold && currentPopupIndex > 0) {
+            savePositionBeforeNavigate();
+            popupOverlay.remove();
+            createPopup(--currentPopupIndex);
+        }
+    }
+}
+
     if (index >= popupData.length || index < 0 || allPopupsClosed) return;
 
     const data = popupData[index];
