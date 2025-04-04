@@ -63,11 +63,32 @@ const popupData = [
 
 let currentPopupIndex = 0;
 let allPopupsClosed = false;
-
 let savedLeft = null;
 let savedTop = null;
-let hasSavedPosition = false; // ✅ 위치 저장 여부 플래그
+let hasSavedPosition = false;
 
+// 📌 이미지 미리 로드 함수
+function preloadImages(callback) {
+    let loadedCount = 0;
+    const images = popupData.map(p => p.image).filter(src => src);
+    if (images.length === 0) {
+        callback();
+        return;
+    }
+
+    images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+        img.onload = img.onerror = () => {
+            loadedCount++;
+            if (loadedCount === images.length) {
+                callback();
+            }
+        };
+    });
+}
+
+// 📌 팝업 생성 함수
 function createPopup(index) {
     if (index >= popupData.length || index < 0 || allPopupsClosed) return;
 
@@ -107,7 +128,58 @@ function createPopup(index) {
     document.body.appendChild(popupOverlay);
     const popupBox = popupOverlay.querySelector(".popup-box");
 
-    // ✅ 모바일 환경이면 스와이프 활성화
+    // ✅ 위치 복원 또는 중앙 정렬
+    if (hasSavedPosition && savedLeft && savedTop) {
+        popupBox.style.left = savedLeft;
+        popupBox.style.top = savedTop;
+        popupBox.style.transform = "translate(0, 0)";
+    } else {
+        popupBox.style.left = "50%";
+        popupBox.style.top = "50%";
+        popupBox.style.transform = "translate(-50%, -50%)";
+    }
+
+    // 📌 닫기 버튼
+    popupOverlay.querySelector(".popup-close").addEventListener("click", () => {
+        popupOverlay.remove();
+        const checkbox = popupOverlay.querySelector("#hidePopup");
+        if (checkbox.checked) setCookie("popup_shown", true, 1);
+    });
+
+    // 📌 하루 동안 보지 않기
+    popupOverlay.querySelector("#hidePopup").addEventListener("change", e => {
+        if (e.target.checked) {
+            setCookie("popup_shown", true, 1);
+            document.querySelectorAll(".popup-overlay").forEach(p => p.remove());
+            allPopupsClosed = true;
+        }
+    });
+
+    // 📌 이전 / 다음 버튼
+    const savePositionBeforeNavigate = () => {
+        const box = document.querySelector(".popup-box");
+        const left = box.style.left;
+        const top = box.style.top;
+        if (left && top && left !== "50%" && top !== "50%") {
+            savedLeft = left;
+            savedTop = top;
+            hasSavedPosition = true;
+        }
+    };
+
+    popupOverlay.querySelector(".popup-prev")?.addEventListener("click", () => {
+        savePositionBeforeNavigate();
+        popupOverlay.remove();
+        createPopup(--currentPopupIndex);
+    });
+
+    popupOverlay.querySelector(".popup-next")?.addEventListener("click", () => {
+        savePositionBeforeNavigate();
+        popupOverlay.remove();
+        createPopup(++currentPopupIndex);
+    });
+
+    // 📱 모바일: 스와이프 + 버튼 숨김
     const isMobile = window.innerWidth <= 768;
     const popupNav = popupOverlay.querySelector(".popup-nav");
     if (isMobile && popupNav) {
@@ -140,60 +212,7 @@ function createPopup(index) {
         }
     }
 
-    // ✅ 위치 복원 또는 중앙 정렬
-    if (hasSavedPosition && savedLeft && savedTop) {
-        popupBox.style.left = savedLeft;
-        popupBox.style.top = savedTop;
-        popupBox.style.transform = "translate(0, 0)";
-    } else {
-        popupBox.style.left = "50%";
-        popupBox.style.top = "50%";
-        popupBox.style.transform = "translate(-50%, -50%)";
-    }
-
-    // 📌 닫기
-    popupOverlay.querySelector(".popup-close").addEventListener("click", () => {
-        popupOverlay.remove();
-        const checkbox = popupOverlay.querySelector("#hidePopup");
-        if (checkbox.checked) setCookie("popup_shown", true, 1);
-    });
-
-    // 📌 하루 동안 보지 않기
-    popupOverlay.querySelector("#hidePopup").addEventListener("change", e => {
-        if (e.target.checked) {
-            setCookie("popup_shown", true, 1);
-            document.querySelectorAll(".popup-overlay").forEach(p => p.remove());
-            allPopupsClosed = true;
-        }
-    });
-
-    // 📌 이전 / 다음 버튼
-    const savePositionBeforeNavigate = () => {
-        const box = document.querySelector(".popup-box");
-        const left = box.style.left;
-        const top = box.style.top;
-
-        // ✅ 유효한 위치 값인지 확인
-        if (left && top && left !== "50%" && top !== "50%") {
-            savedLeft = left;
-            savedTop = top;
-            hasSavedPosition = true;
-        }
-    };
-
-    popupOverlay.querySelector(".popup-prev")?.addEventListener("click", () => {
-        savePositionBeforeNavigate();
-        popupOverlay.remove();
-        createPopup(--currentPopupIndex);
-    });
-
-    popupOverlay.querySelector(".popup-next")?.addEventListener("click", () => {
-        savePositionBeforeNavigate();
-        popupOverlay.remove();
-        createPopup(++currentPopupIndex);
-    });
-
-    // 📌 드래그 기능 + 화면 밖 제한
+    // 📌 드래그 가능
     let isDragging = false;
     let offsetX = 0;
     let offsetY = 0;
@@ -208,7 +227,6 @@ function createPopup(index) {
 
     document.addEventListener("mousemove", function (e) {
         if (!isDragging) return;
-
         let newLeft = e.clientX - offsetX;
         let newTop = e.clientY - offsetY;
 
@@ -227,24 +245,24 @@ function createPopup(index) {
         if (isDragging) {
             const left = popupBox.style.left;
             const top = popupBox.style.top;
-
             if (left && top && left !== "50%" && top !== "50%") {
                 savedLeft = left;
                 savedTop = top;
                 hasSavedPosition = true;
             }
-
             isDragging = false;
         }
     });
 }
 
-// 📌 팝업 시작 함수
+// 📌 팝업 시작
 function startPopup() {
     if (getCookie("popup_shown") !== "true") {
-        setTimeout(() => {
-            createPopup(currentPopupIndex);
-        }, 1000);
+        preloadImages(() => {
+            setTimeout(() => {
+                createPopup(currentPopupIndex);
+            }, 200); // 약간의 여유 시간
+        });
     }
 }
 
