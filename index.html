@@ -1,102 +1,52 @@
-<!--index.html-->
-
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-    <!-- ✅ SEO 최적화 -->
-    <title>웰워싱 | 지하주차장 세차설비 · 스팀세차기 · 폐수처리기 · 셀프세차장 전문</title>
-    <meta name="description" content="웰워싱은 지하주차장 세차기, 스팀세차기, 폐수처리기, 진공청소기 등 무인 세차 설비 전반을 전문으로 시공합니다. 아파트, 주차장, 상가 등 다양한 환경에 맞춘 세차 솔루션을 제공합니다.">
-    <meta name="keywords" content="아파트 세차, 아파트 세차장, 아파트 셀프 세차장, 아파트 진공청소기, 간이 세차, 간이 세차장, 간이 셀프 세차장, 스팀 셀프 세차장, 지하 주차장 세차, 지하 주차장 세차기, 지하 주차장 셀프세차, 지하 주차장 진공청소기, 전기차 충전기용 세차, 전기차 충전기용 셀프세차, 전기차 충전기용 진공청소기">
+  <!-- ✅ SEO 최적화 -->
+  <title>웰워싱 | 아파트 셀프세차장 전문 브랜드</title>
+  <meta name="description" content="아파트 지하주차장에 최적화된 셀프세차장 솔루션, 웰워싱이 시공합니다.">
+  <meta name="keywords" content="아파트 세차, 아파트 세차장, 아파트 셀프 세차장, 아파트 진공청소기, 간이 세차, 간이 세차장, 간이 셀프 세차장, 스팀 셀프 세차장, 지하 주차장 세차, 지하 주차장 세차기, 지하 주차장 셀프세차, 지하 주차장 진공청소기, 전기차 충전기용 세차, 전기차 충전기용 셀프세차, 전기차 충전기용 진공청소기">
 
-    <!-- ✅ 오픈그래프 (카카오톡, 페북 공유용) -->
-    <meta property="og:title" content="웰워싱 | 아파트 무인 세차 시스템 전문">
-    <meta property="og:description" content="세차장 구축, 드라이세차기, 세차장 자동화 장비는 웰워싱에 맡기세요.">
-    <meta property="og:image" content="https://wellwashing.com/assets/thumbnail.jpg">
-    <meta property="og:url" content="https://wellwashing.com">
+  <!-- ✅ 오픈그래프 -->
+  <meta property="og:title" content="웰워싱 | 아파트 무인 세차 시스템 전문">
+  <meta property="og:description" content="세차장 구축, 드라이세차기, 세차장 자동화 장비는 웰워싱에 맡기세요.">
+  <meta property="og:image" content="https://wellwashing.com/assets/thumbnail.jpg">
+  <meta property="og:url" content="https://wellwashing.com">
 
-    <!-- ✅ 깜빡임 방지: 초기에는 body 숨김 -->
-    <style>
-        body {
-            visibility: hidden;
-        }
-    </style>
+  <!-- ✅ 초기 body 숨김 처리 -->
+  <style>
+    body {
+      visibility: hidden;
+    }
+  </style>
 
-    <!-- ✅ CSS 파일 로드 -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="popup.css">
-    <link rel="stylesheet" href="footer.css">
+  <!-- ✅ CSS 로드 -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="footer.css">
 </head>
 
 <body>
-    <!-- 🚀 헤더 로드 -->
-    <header id="header"></header>
+  <!-- 🚀 헤더 로드 -->
+  <header id="header"></header>
 
-    <main class="dark-overlay-main">
-        <img src="src/images/logo.png" alt="WELL WASHING Logo" class="popup-logo">
-        <h1>좋은 장비 + 좋은 관리 = 좋은 세차</h1>
-        <p>
-            웰워싱은 단순한 세차 설비를 넘어, <br />
-            고객에게 최고의 세차 경험을 제공하는 것을 목표로 합니다. <br />
-            기술력과 관리 시스템의 차이가, 세차 품질의 차이를 만듭니다.
-        </p>
-    </main>
+  <main class="dark-overlay-main">
+    <img src="src/images/logo.png" alt="WELL WASHING Logo" class="popup-logo" />
+    <h1>좋은 장비 + 좋은 관리 = 좋은 세차</h1>
+    <p>
+      웰워싱은 단순한 세차 설비를 넘어, <br />
+      고객에게 최고의 세차 경험을 제공하는 것을 목표로 합니다. <br />
+      기술력과 관리 시스템의 차이가, 세차 품질의 차이를 만듭니다.
+    </p>
+  </main>
 
-    <!-- 🚀 푸터 로드 -->
-    <footer id="footer"></footer>
+  <!-- 🚀 푸터 로드 -->
+  <footer id="footer"></footer>
 
-    <!-- ✅ 팝업 사용 여부 설정 -->
-    <script>
-        const USE_POPUP = true; // ← 팝업 사용 여부 제어: true 또는 false
-    </script>
-
-    <script>
-        // 🚀 fetch()를 사용하여 header.html과 footer.html을 동적으로 불러오기
-        async function loadComponent(id, url) {
-            try {
-                const response = await fetch(url, { cache: "no-cache" });  // 🔥 캐싱 문제 방지
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                const html = await response.text();
-                document.getElementById(id).innerHTML = html;
-            } catch (error) {
-                console.error(`🚨 ${url} 로딩 중 오류 발생:`, error);
-            }
-        }
-
-        // 🚀 헤더 & 푸터를 먼저 로드한 후 조건부로 팝업 실행
-        Promise.all([
-            loadComponent("header", "header.html"),
-            loadComponent("footer", "footer.html")
-        ]).then(() => {
-            console.log("🚀 헤더 & 푸터 로딩 완료!");
-
-            // ✅ 모든 로딩이 끝난 뒤 body 보이게
-            document.body.style.visibility = "visible";
-
-            if (typeof USE_POPUP !== "undefined" && USE_POPUP) {
-                console.log("✅ 팝업 실행 조건 충족 → popup.js 로드");
-                loadPopupScript(); // 🚀 팝업 스크립트 실행
-            } else {
-                console.log("❌ 팝업 실행 조건 미충족 → popup.js 미로드");
-            }
-        }).catch(error => {
-            console.error("🚨 헤더/푸터 로딩 중 오류 발생!", error);
-        });
-
-        // 🚀 팝업 JS 동적 로드 함수
-        function loadPopupScript() {
-            const script = document.createElement("script");
-            script.src = "popup.js";
-            script.defer = true;
-            document.body.appendChild(script);
-        }
-    </script>
+  <!-- ✅ JS 파일 로드 -->
+  <script src="index.js" defer></script>
 </body>
-
 </html>
