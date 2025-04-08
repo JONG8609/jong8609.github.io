@@ -1,4 +1,10 @@
+# 모든 검색 엔진에 대해 크롤링 허용
 User-agent: *
 Allow: /
 
+# 특정 파일/디렉토리 크롤링 금지 예시 (필요 시만 사용)
+# Disallow: /admin/
+# Disallow: /private/
+
+# sitemap 위치 명시 (절대경로로)
 Sitemap: https://wellwashing.com/sitemap.xml
