@@ -11,35 +11,7 @@
   <script src="franchise-write.js" defer></script>
   <script src="header.js" defer></script>
   <script src="footer.js" defer></script>
-  <style>
-    .info-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 15px;
-    }
-    .info-table td {
-      padding: 10px;
-      vertical-align: middle;
-    }
-    .info-table td:first-child {
-      width: 140px;
-      font-weight: bold;
-      color: #333;
-      background-color: #f9f9f9;
-    }
-    .info-table input[type="text"],
-    .info-table select {
-      padding: 8px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .inline-inputs {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-  </style>
+
 </head>
 
 <body>
@@ -111,24 +83,29 @@
         </div>
 
         <div class="form-section">
-          <h2>기타</h2>
-          <label for="password">비밀번호</label>
+          
+          <label for="password">게시글 비밀번호</label>
           <input type="password" id="password" name="password" required />
 
           <label>개인정보 수집 및 이용 동의</label>
           <div class="privacy-box">
             <p>개인정보의 수집 · 이용 목적<br>
-            서비스 신청 및 상담 진행, 공지 및 대응과제, 문의내용 등록 등 고객 응대를 위한 목적</p>
+              서비스 신청 및 상담 진행, 공지 및 대응과제, 문의내용 등록 등 고객 응대를 위한 목적</p>
             <p>수집하는 개인정보 항목<br>
-            이름, 연락처, 이메일 등</p>
+              이름, 연락처, 이메일 등</p>
             <p>개인정보의 보유 및 이용 기간<br>
-            접수일 기준 최대 1년간 보관 후 파기되며, 동의 철회 요청 시 즉시 삭제됩니다.</p>
+              접수일 기준 최대 1년간 보관 후 파기되며, 동의 철회 요청 시 즉시 삭제됩니다.</p>
           </div>
           <div class="privacy-agree">
-            <input type="checkbox" id="agree" required>
-            <label for="agree">동의합니다</label>
+            <div class="radio-wrapper">
+              <input type="radio" id="agree-yes" name="agree" value="yes" required>
+              <label for="agree-yes">동의</label>
+            </div>
+            <div class="radio-wrapper">
+              <input type="radio" id="agree-no" name="agree" value="no">
+              <label for="agree-no">동의 안함</label>
+            </div>
           </div>
-        </div>
 
         <div class="form-buttons">
           <button type="submit" class="submit-button">등록</button>

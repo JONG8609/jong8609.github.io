@@ -22,6 +22,7 @@ footer {
 }
 
 .franchise-container {
+  margin-top: 20px;
   background-color: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(6px);
   border-radius: 12px;
@@ -53,12 +54,16 @@ footer {
 
 .form-section {
   background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   padding: 24px;
+
 }
 
 .form-section h2 {
   font-size: 18px;
   margin-bottom: 16px;
+  color: #444;
   border-bottom: 1px solid #ccc;
   padding-bottom: 6px;
 }
@@ -105,10 +110,42 @@ footer {
 .privacy-agree {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 30px;
   margin-top: 8px;
 }
 
+.radio-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.radio-wrapper label {
+  display: inline-block;
+  white-space: nowrap; /* ✅ 줄바꿈 방지 */
+  font-weight: 500;
+  font-size: 15px;
+  color: #333;
+  margin: 0;
+}
+
+.radio-wrapper input[type="radio"] {
+  margin: 0;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* 클릭 시 외곽선 제거 */
+.radio-option input[type="radio"]:focus {
+  outline: none;
+  box-shadow: none;
+}
 .form-buttons {
   display: flex;
   justify-content: flex-end;
@@ -170,4 +207,32 @@ footer {
     flex-direction: column;
     align-items: stretch;
   }
+}
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.info-table td {
+  padding: 10px;
+  vertical-align: middle;
+}
+.info-table td:first-child {
+  width: 140px;
+  font-weight: bold;
+  color: #333;
+  background-color: #f9f9f9;
+}
+.info-table input[type="text"],
+.info-table select {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.inline-inputs {
+  display: flex;
+  gap: 6px;
+  align-items: center;
 }
