@@ -1,19 +1,31 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>창업 문의 게시판 | WELL WASHING</title>
     <link rel="stylesheet" href="styles.css"> <!-- 기존 메인 CSS -->
-    <link rel="stylesheet" href="franchise-style.css"> <!-- 창업 문의1 전용 CSS -->
+    <link rel="stylesheet" href="franchise.css"> <!-- 창업 문의 전용 CSS -->
+    <link rel="stylesheet" href="footer.css">
     <script src="header.js" defer></script>
-    <script src="franchise.js" defer></script>
+    <script src="footer.js" defer></script>
+    <script src="franchise.js" type="module" defer></script>
 </head>
+
 <body>
+    <header id="header"></header>
     <div class="franchise-wrapper">
         <main class="franchise-container">
             <h1>창업 문의</h1>
-            <p>창업 관련 문의 목록을 확인하세요.</p>
+            <p>
+                아파트 세차장 창업을 고민 중이신가요?<br>
+                웰워싱에서는 예비 창업주분들을 위해 맞춤형 무인세차 솔루션과 상담을 제공하고 있습니다.<br><br>
+                창업 관련 궁금하신 점이 있으시다면<br>
+                아래 <strong>[글쓰기]</strong> 버튼을 눌러 문의 내용을 남겨주세요.<br><br>
+                남겨주신 문의는 확인 후 빠르게 연락드리겠습니다.<br>
+                부담 없이 언제든지 문의해 주세요!
+            </p>
 
             <table class="inquiry-table">
                 <thead>
@@ -38,5 +50,7 @@
             <button id="write-btn" class="write-button">글쓰기</button>
         </main>
     </div>
+    <footer id="footer"></footer>
 </body>
+
 </html>

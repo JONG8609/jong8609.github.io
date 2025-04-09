@@ -1,51 +1,70 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const inquiryList = document.getElementById("inquiry-list");
-    const writeBtn = document.getElementById("write-btn");
+// franchise.js
 
-    const inquiries = JSON.parse(localStorage.getItem("inquiries")) || [];
-    const itemsPerPage = 10;
-    let currentPage = 1;
+// 🔧 Firebase 구성
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs
+} from "https://www.gstatic.com/firebasejs/9.6.11/firebase-firestore.js";
 
-    // 문의 내역 불러오기 (페이지네이션1 적용)
-    function loadInquiries(page) {
-        inquiryList.innerHTML = "";
-        const start = (page - 1) * itemsPerPage;
-        const end = start + itemsPerPage;
-        const paginatedItems = inquiries.slice(start, end);
+// 🔧 Firebase 설정 정보
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "000000000000",
+  appId: "YOUR_APP_ID"
+};
 
-        paginatedItems.forEach((inquiry, index) => {
-            const listItem = document.createElement("tr");
-            listItem.innerHTML = `
-                <td>${inquiries.length - (start + index)}</td>
-                <td><span class="lock-icon">🔒</span> ${inquiry.title} <span class="new-label">NEW</span></td>
-                <td>${inquiry.name[0]}****</td>
-                <td>${inquiry.date}</td>
-            `;
-            inquiryList.appendChild(listItem);
-        });
+// 🔧 Firebase 초기화
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-        document.getElementById("current-page").innerText = currentPage;
-    }
+// 🔄 게시글 목록 불러오기
+async function loadInquiries() {
+  const tbody = document.getElementById("inquiry-list");
+  if (!tbody) return;
 
-    // 글쓰기 버튼 클릭 시 문의 작성 페이지로 이동
-    writeBtn.addEventListener("click", function () {
-        window.location.href = "write_franchise.html";
+  tbody.innerHTML = "";
+
+  const q = query(
+    collection(db, "franchise_inquiries"),
+    orderBy("createdAt", "desc"),
+    limit(10)
+  );
+
+  const querySnapshot = await getDocs(q);
+
+  let index = 1;
+  querySnapshot.forEach((doc) => {
+    const data = doc.data();
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${index++}</td>
+      <td>${data.title}</td>
+      <td>${data.name}</td>
+      <td>${new Date(data.createdAt.toDate()).toLocaleDateString()}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// ✅ 초기 실행
+window.addEventListener("DOMContentLoaded", () => {
+  loadInquiries();
+
+  const writeBtn = document.getElementById("write-btn");
+  if (writeBtn) {
+    writeBtn.addEventListener("click", () => {
+      console.log("✅ 글쓰기 버튼 클릭됨");
+      window.location.href = "franchiseWrite.html";
     });
-
-    // 페이지네이션 이벤트
-    document.getElementById("prev-page").addEventListener("click", function () {
-        if (currentPage > 1) {
-            currentPage--;
-            loadInquiries(currentPage);
-        }
-    });
-
-    document.getElementById("next-page").addEventListener("click", function () {
-        if (currentPage * itemsPerPage < inquiries.length) {
-            currentPage++;
-            loadInquiries(currentPage);
-        }
-    });
-
-    loadInquiries(currentPage);
+  } else {
+    console.warn("❌ write-btn 요소를 찾을 수 없습니다.");
+  }
 });
